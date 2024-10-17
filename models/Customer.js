@@ -13,7 +13,7 @@ const customerSchema = new mongoose.Schema({
   ],
   totalGive: { type: Number, default: 0 },
   totalGet: { type: Number, default: 0 },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true } // Add user reference
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true } 
 });
 
 module.exports = mongoose.model('Customer', customerSchema);

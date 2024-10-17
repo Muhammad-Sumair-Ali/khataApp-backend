@@ -1,10 +1,10 @@
 const Customer = require('../models/Customer');
 
 
-// Add a transaction
+
 exports.addTransaction = async (req, res) => {
-  const customerId = req.params.id; // Get customerId from URL params
-  const { amount, type, details } = req.body; // Get amount, type, and details from body
+  const customerId = req.params.id; 
+  const { amount, type, details } = req.body; 
 
   try {
     const customer = await Customer.findById(customerId);
@@ -27,13 +27,11 @@ exports.addTransaction = async (req, res) => {
 };
 
 
-// Get all customers
-// Get all customers for the logged-in user
 exports.getCustomers = async (req, res) => {
-  const userId = req.user.id; // Get the logged-in user's ID
+  const userId = req.user.id; 
 
   try {
-    const customers = await Customer.find({ userId }); // Fetch customers associated with the user
+    const customers = await Customer.find({ userId });
     res.status(200).json(customers);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -41,16 +39,15 @@ exports.getCustomers = async (req, res) => {
 };
 
 
-// Add a customer for the logged-in user
 exports.addCustomer = async (req, res) => {
   const { name, phone } = req.body;
-  const userId = req.user.id; // Assuming JWT stores the user's ID in req.user
+  const userId = req.user.id; 
 
   try {
     const newCustomer = new Customer({
       name,
       phone,
-      userId, // Associate the customer with the logged-in user
+      userId,
     });
 
     await newCustomer.save();

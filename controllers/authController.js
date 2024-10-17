@@ -1,23 +1,22 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Make sure to import your User model
+const User = require('../models/User'); 
 
 exports.login = async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Find the user by username
+
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    // Validate the password
+  
     const isMatch = await user.validatePassword(password);
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    // Generate JWT token
     const token = jwt.sign({ id: user._id }, 'your_jwt_secret_key', { expiresIn: '24h' });
 
     res.json({
@@ -43,7 +42,6 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: 'Email already taken ' });
     }
 
-    // Create and save the new user
     const newUser = new User({ username, password });
     await newUser.save();
 
