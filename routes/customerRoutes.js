@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/customers', authenticateToken, addCustomer);
 
-router.get('/customers', authenticateToken, getCustomers);
+router.get('/allcustomers', authenticateToken, getCustomers);
 
 router.post('/transactions/:id', authenticateToken, addTransaction);
 router.get('/customer/:id', authenticateToken, getSingleCustomers);
